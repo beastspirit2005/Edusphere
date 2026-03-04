@@ -1,0 +1,88 @@
+.chat-container{
+width:900px;
+height:85vh;
+margin:auto;
+background:#0d1f3d;
+border-radius:14px;
+display:flex;
+flex-direction:column;
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+overflow:hidden;
+}
+
+.chat-topbar{
+display:flex;
+align-items:center;
+gap:15px;
+padding:15px;
+background:#08162c;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.back-btn{
+background:#2a6df4;
+border:none;
+padding:8px 14px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.back-btn:hover
+
+.chat-box{
+flex:1;
+padding:20px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.user{
+align-self:flex-end;
+background:#2a6df4;
+padding:10px 14px;
+border-radius:12px;
+max-width:65%;
+}
+
+.ai{
+align-self:flex-start;
+background:#162c55;
+padding:10px 14px;
+border-radius:12px;
+max-width:65%;
+}
+
+.upload-area{
+padding:10px 15px;
+background:#08162c;
+border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.chat-input{
+display:flex;
+gap:10px;
+padding:15px;
+background:#08162c;
+}
+
+.chat-input input{
+flex:1;
+padding:10px;
+border:none;
+border-radius:6px;
+outline:none;
+}
+
+.chat-input button{
+background:#2a6df4;
+border:none;
+padding:10px 16px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.chat-input button:hover

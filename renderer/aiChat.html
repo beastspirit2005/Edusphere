@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>EduSphere AI Tutor</title>
+
+<link rel="stylesheet" href="css/student.css">
+<link rel="stylesheet" href="css/aiChat.css">
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<!-- TOP BAR -->
+
+<div class="chat-topbar">
+
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<h2>🤖 EduSphere AI Tutor</h2>
+<button onclick="clearChat()">Clear Chat</button>
+
+</div>
+
+<!-- CHAT AREA -->
+
+<div id="chatBox" class="chat-box">
+
+<!-- messages will appear here -->
+
+</div>
+
+<!-- FILE UPLOAD -->
+
+<div class="upload-area">
+
+<input type="file" id="fileInput">
+
+</div>
+
+<!-- CHAT INPUT -->
+
+<div class="chat-input">
+
+<input
+type="text"
+id="userMessage"
+placeholder="Ask anything about your subjects..."
+
+>
+
+<button onclick="sendMessage()">Send</button>
+
+
+</div>
+
+</div>
+
+<script src="aiChat.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduSphere Student</title>
+
+<link rel="stylesheet" href="css/student.css">
+
+<script src="../node_modules/chart.js/dist/chart.umd.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>EduSphere</h2>
+
+<p onclick="showDashboard()">Dashboard</p>
+
+<p onclick="showAttendance()">Attendance</p>
+
+<p onclick="showPerformance()">Performance</p>
+
+<p onclick="showCourses()">Courses</p>
+
+<p onclick="showSettings()">Settings</p>
+
+</div>
+
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<h1 id="pageTitle">Student Dashboard</h1>
+
+<button class="logout-btn" onclick="logout()">Logout</button>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard-grid visible" id="dashboardSection">
+
+
+<div class="card stat-card">
+
+<h3>Average Marks</h3>
+
+<h1 id="avgMarks">--</h1>
+
+</div>
+
+
+<div class="card stat-card">
+
+<h3>Attendance %</h3>
+
+<h1 id="avgAttendance">--</h1>
+
+</div>
+
+
+<div class="card stat-card">
+
+<h3>Total Subjects</h3>
+
+<h1 id="totalSubjects">--</h1>
+
+</div>
+
+
+<div class="card">
+
+<h3>Attendance Overview</h3>
+
+<canvas id="attendanceChart"></canvas>
+
+</div>
+
+
+<div class="card">
+
+<h3>Marks Overview</h3>
+
+<canvas id="marksChart"></canvas>
+
+</div>
+
+<div class="card">
+
+<h3>AI Performance Analysis</h3>
+
+<button class="ai-analyze-btn" onclick="runAIAnalysis()">
+
+<span>🧠 Analyze My Performance</span>
+
+</button>
+
+<div id="aiResult" class="ai-result"></div>
+
+<div id="aiResult" style="margin-top:15px"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ATTENDANCE -->
+
+<div class="dashboard-grid hidden" id="attendanceSection">
+
+<div class="card">
+
+<h3>Detailed Attendance</h3>
+
+<div id="attendanceTable"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- PERFORMANCE -->
+
+<div class="dashboard-grid hidden" id="performanceSection">
+
+<div class="card">
+
+<h3>Performance Details</h3>
+
+<div id="marksTable"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- COURSES -->
+
+<div class="dashboard-grid hidden" id="coursesSection">
+
+<div class="card">
+
+<h3>Your Courses</h3>
+
+<div id="coursesList">No courses yet</div>
+
+</div>
+
+</div>
+
+
+
+<!-- SETTINGS -->
+
+<div class="dashboard-grid hidden" id="settingsSection">
+
+
+<!-- PROFILE VIEW -->
+
+<div class="card">
+
+<h3>Your Profile</h3>
+
+<p><b>Name:</b> <span id="viewName"></span></p>
+
+<p><b>Email:</b> <span id="viewEmail"></span></p>
+
+<p><b>Role:</b> <span id="viewRole"></span></p>
+
+
+<button onclick="openEditProfile()">Edit Profile</button>
+
+</div>
+
+
+
+<!-- THEME -->
+
+<div class="card">
+
+<h3>Appearance</h3>
+
+<label for="themeSelect">Theme</label>
+
+<select id="themeSelect" class="input" onchange="changeTheme()">
+
+<option value="dark">Dark</option>
+
+<option value="light">Light</option>
+
+</select>
+
+<p id="themeMsg"></p>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<!-- AI BUTTON -->
+
+<button class="ai-button" onclick="openAI()">🤖</button>
+
+
+
+<!-- BACKEND -->
+
+<script src="student.js"></script>
+
+
+
+<!-- NAVIGATION SCRIPT -->
+
+<script>
+
+
+const pageTitle = document.getElementById("pageTitle");
+
+
+
+function logout(){
+
+if(confirm("Logout from EduSphere?")){
+
+localStorage.clear();
+
+window.location.href="login.html";
+
+}
+
+}
+
+
+function openAI(){
+    window.location.href = "aiChat.html?from=student";
+}
+
+
+
+function hideAll(){
+
+document.querySelectorAll(".dashboard-grid")
+
+.forEach(section=>{
+
+section.classList.add("hidden");
+
+section.classList.remove("visible");
+
+});
+
+}
+
+
+
+function showDashboard(){
+
+hideAll();
+
+dashboardSection.classList.remove("hidden");
+
+dashboardSection.classList.add("visible");
+
+pageTitle.innerText="Student Dashboard";
+
+}
+
+
+
+function showAttendance(){
+
+hideAll();
+
+attendanceSection.classList.remove("hidden");
+
+attendanceSection.classList.add("visible");
+
+pageTitle.innerText="Attendance";
+
+}
+
+
+
+function showPerformance(){
+
+hideAll();
+
+performanceSection.classList.remove("hidden");
+
+performanceSection.classList.add("visible");
+
+pageTitle.innerText="Performance";
+
+}
+
+
+
+function showCourses(){
+
+hideAll();
+
+coursesSection.classList.remove("hidden");
+
+coursesSection.classList.add("visible");
+
+pageTitle.innerText="Courses";
+
+loadCourses();
+
+}
+
+
+
+async function showSettings(){
+
+hideAll();
+
+settingsSection.classList.remove("hidden");
+
+settingsSection.classList.add("visible");
+
+pageTitle.innerText="Settings";
+
+await loadProfile();
+
+
+
+
+setTimeout(()=>{
+
+const btn =
+document.querySelector("#settingsSection button");
+
+if(btn) btn.focus();
+
+},100);
+
+}
+
+
+
+function openEditProfile(){
+
+window.location="editProfile.html";
+
+}
+
+
+
+function changeTheme(){
+
+const theme=themeSelect.value;
+
+document.body.classList.remove("light");
+
+if(theme==="light"){
+
+document.body.classList.add("light");
+
+}
+
+localStorage.setItem("theme",theme);
+
+themeMsg.innerText="Theme updated";
+
+}
+
+
+
+function loadTheme(){
+
+const theme=localStorage.getItem("theme")||"dark";
+
+if(theme==="light"){
+
+document.body.classList.add("light");
+
+}
+
+themeSelect.value=theme;
+
+}
+
+
+loadTheme();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+-- USERS TABLE
+CREATE TABLE IF NOT EXISTS users (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+email TEXT UNIQUE,
+password TEXT,
+role TEXT,
+class_id INTEGER
+
+);
+
+-- CLASSES TABLE
+CREATE TABLE IF NOT EXISTS classes (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+class_name TEXT,
+department TEXT,
+year INTEGER,
+section TEXT
+
+);
+
+-- SUBJECTS TABLE
+CREATE TABLE IF NOT EXISTS subjects (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+subject_name TEXT,
+subject_code TEXT
+
+);
+
+-- COURSES TABLE
+CREATE TABLE IF NOT EXISTS courses (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+subject_id INTEGER,
+class_id INTEGER,
+teacher_id INTEGER
+
+);
+
+-- MARKS TABLE
+CREATE TABLE IF NOT EXISTS marks (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+student_id INTEGER,
+course_id INTEGER,
+marks INTEGER,
+exam_type TEXT,
+date TEXT
+
+);
+
+-- ATTENDANCE TABLE
+CREATE TABLE IF NOT EXISTS attendance (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+student_id INTEGER,
+course_id INTEGER,
+date TEXT,
+status TEXT
+
+);

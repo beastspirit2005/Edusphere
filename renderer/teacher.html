@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduSphere Teacher</title>
+
+<link rel="stylesheet" href="css/teacher.css">
+
+<script src="../node_modules/chart.js/dist/chart.umd.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+<h2>EduSphere</h2>
+
+<p onclick="showDashboard()">Dashboard</p>
+
+<p onclick="showStudents()">Students</p>
+
+<p onclick="showMarks()">Marks</p>
+
+<p onclick="showAttendance()">Attendance</p>
+
+<p onclick="showSettings()">Settings</p>
+
+</div>
+
+
+
+<div class="main">
+
+
+<div class="topbar">
+
+<h1 id="pageTitle">Teacher Dashboard</h1>
+
+<button class="logout-btn" onclick="logout()">Logout</button>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard-grid active" id="dashboardSection">
+
+<div class="card">
+
+<h3>Class Average Marks</h3>
+
+<canvas id="avgMarksChart"></canvas>
+
+</div>
+
+
+<div class="card">
+
+<h3>Class Average Attendance</h3>
+
+<canvas id="avgAttendanceChart"></canvas>
+
+</div>
+
+</div>
+
+
+
+<!-- STUDENTS -->
+
+<div class="dashboard-grid" id="studentsSection">
+
+
+<div class="card">
+
+<h3>Add Student</h3>
+
+<input type="text" id="newStudentName" placeholder="Name">
+
+<input type="email" id="newStudentEmail" placeholder="Email">
+
+<input type="password" id="newStudentPassword" placeholder="Password">
+
+<button onclick="addStudent()">Add Student</button>
+
+<p id="studentMsg"></p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Student List</h3>
+
+<div id="studentTable"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- MARKS -->
+
+<div class="dashboard-grid" id="marksSection">
+
+
+<div class="card">
+
+<h3>Add Marks</h3>
+
+<select id="studentSelect"></select>
+
+<select id="subject">
+
+<option value="Maths">Maths</option>
+
+<option value="Physics">Physics</option>
+
+<option value="Chemistry">Chemistry</option>
+
+<option value="English">English</option>
+
+<option value="Computer">Computer</option>
+
+</select>
+
+<input type="number" id="marks" placeholder="Marks">
+
+<button onclick="addMarks()">Add</button>
+
+<p id="marksMsg"></p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Marks List</h3>
+
+<div id="marksTable"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ATTENDANCE -->
+
+<div class="dashboard-grid" id="attendanceSection">
+
+
+<div class="card">
+
+<h3>Add Attendance</h3>
+
+<select id="studentSelectAtt"></select>
+
+<label for="attSubject">Subject</label>
+
+<select id="attSubject">
+
+<option value="Maths">Maths</option>
+
+<option value="Physics">Physics</option>
+
+<option value="Chemistry">Chemistry</option>
+
+<option value="English">English</option>
+
+<option value="Computer">Computer</option>
+
+</select>
+
+<input type="number" id="attendance" placeholder="Attendance %">
+
+<button onclick="addAttendance()">Add</button>
+
+<p id="attMsg"></p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Attendance List</h3>
+
+<div id="attendanceTable"></div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- SETTINGS -->
+
+<div class="dashboard-grid" id="settingsSection">
+
+<div class="card">
+
+<h3>Teacher Profile</h3>
+
+<p>Name: <span id="teacherName"></span></p>
+
+<p>Email: <span id="teacherEmail"></span></p>
+
+<p>Mobile: <span id="teacherMobile"></span></p>
+
+<p>Class: <span id="teacherClass"></span></p>
+
+<p>Section: <span id="teacherSection"></span></p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<button class="ai-button" onclick="openAI()">🤖</button>
+
+
+
+<script src="teacher.js"></script>
+
+
+
+<script>
+
+
+const pageTitle=document.getElementById("pageTitle");
+
+
+function hideAll(){
+
+document.querySelectorAll(".dashboard-grid")
+
+.forEach(section=>section.classList.remove("active"));
+
+}
+
+
+function showDashboard(){
+
+hideAll();
+
+dashboardSection.classList.add("active");
+
+pageTitle.innerText="Teacher Dashboard";
+
+loadDashboard();
+
+}
+
+
+function showStudents(){
+
+hideAll();
+
+studentsSection.classList.add("active");
+
+pageTitle.innerText="Students";
+
+loadStudents();
+
+}
+
+
+function showMarks(){
+
+hideAll();
+
+marksSection.classList.add("active");
+
+pageTitle.innerText="Marks";
+
+loadStudentsDropdown();
+
+loadMarks();
+
+}
+
+
+function showAttendance(){
+
+hideAll();
+
+attendanceSection.classList.add("active");
+
+pageTitle.innerText="Attendance";
+
+loadStudentsDropdown();
+
+loadAttendance();
+
+}
+
+
+function showSettings(){
+
+hideAll();
+
+settingsSection.classList.add("active");
+
+pageTitle.innerText="Settings";
+
+loadTeacherProfile();
+
+}
+
+
+function logout(){
+
+window.location="login.html";
+
+}
+
+
+
+function openAI(){
+    window.location.href = "aiChat.html?from=teacher";
+}
+
+
+</script>
+
+
+</body>
+
+</html>

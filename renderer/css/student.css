@@ -1,0 +1,573 @@
+/* ===== EduSphere Student Premium Layout FINAL ===== */
+
+
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root{
+
+--bg-main:#0f172a;
+--bg-card:rgba(15,23,42,0.75);
+--bg-sidebar:rgba(2,6,23,0.85);
+--bg-topbar:rgba(15,23,42,0.7);
+
+--text-color:white;
+
+--input-bg:#1e293b;
+
+--sidebar-width:240px;
+--gap:20px;
+--card-radius:16px;
+
+}
+
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+body.light{
+
+--bg-main:#f1f5f9;
+--bg-card:white;
+--bg-sidebar:#e2e8f0;
+--bg-topbar:#e2e8f0;
+
+--text-color:#0f172a;
+
+--input-bg:#cbd5e1;
+
+}
+
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+
+box-sizing:border-box;
+
+}
+
+
+/* ✅ FIXED BODY (NO FLEX) */
+
+body{
+
+margin:0;
+
+font-family:'Segoe UI',sans-serif;
+
+background:var(--bg-main);
+
+color:var(--text-color);
+
+transition:0.3s;
+
+}
+
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:240px;
+
+height:100vh;
+
+z-index:1000;
+
+}
+
+
+.sidebar h2{
+
+margin-bottom:25px;
+
+color:#3b82f6;
+
+}
+
+
+.sidebar p{
+
+padding:12px;
+
+margin:5px 0;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
+.sidebar p:hover{
+
+background:#3b82f6;
+
+color:white;
+
+transform:translateX(5px);
+
+}
+
+
+
+/* =========================
+   MAIN AREA
+========================= */
+
+.main{
+
+margin-left:240px;
+
+padding:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+position:relative;
+
+z-index:1;
+
+}
+
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+
+height:60px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 20px;
+
+border-radius:16px;
+
+background:var(--bg-topbar);
+
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+
+}
+
+
+
+/* =========================
+   GRID
+========================= */
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:var(--gap);
+
+}
+
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+min-height:240px;
+
+padding:20px;
+
+border-radius:var(--card-radius);
+
+background:var(--bg-card);
+
+-webkit-backdrop-filter:blur(10px);
+backdrop-filter:blur(10px);
+
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+transition:0.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 20px rgba(59,130,246,0.5);
+
+}
+
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input{
+
+width:100%;
+
+padding:10px;
+
+margin-top:5px;
+margin-bottom:15px;
+
+border-radius:8px;
+
+border:none;
+
+background:var(--input-bg);
+
+color:var(--text-color);
+
+}
+
+
+
+/* =========================
+   LOGOUT BUTTON
+========================= */
+
+.logout-btn{
+
+padding:8px 18px;
+
+background:#ef4444;
+
+border:none;
+
+border-radius:10px;
+
+color:white;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.3s;
+
+}
+
+
+.logout-btn:hover{
+
+background:#dc2626;
+
+transform:scale(1.05);
+
+}
+
+
+
+/* =========================
+   AI BUTTON
+========================= */
+
+.ai-button{
+
+position:fixed;
+
+bottom:25px;
+
+right:25px;
+
+width:65px;
+
+height:65px;
+
+border-radius:50%;
+
+border:none;
+
+font-size:26px;
+
+background:linear-gradient(135deg,#3b82f6,#06b6d4);
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:0 0 25px rgba(59,130,246,0.6);
+
+z-index:9999;   /* VERY IMPORTANT */
+
+}
+
+
+.ai-button:hover{
+
+transform:scale(1.1);
+
+}
+
+
+
+/* =========================
+   SECTION VISIBILITY
+========================= */
+
+.hidden{
+
+display:none;
+
+}
+
+
+.visible{
+
+display:grid;
+
+}
+
+
+
+/* =========================
+   PROFILE MESSAGE
+========================= */
+
+#profileMsg{
+
+margin-top:10px;
+
+color:#10b981;
+
+}
+
+
+
+/* =========================
+   STATS CARD
+========================= */
+
+.stat-card{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:150px;
+
+}
+
+
+.stat-card h1{
+
+font-size:36px;
+
+margin-top:10px;
+
+color:#3b82f6;
+
+}
+
+
+
+/* =========================
+   FIX CHART SIZE
+========================= */
+
+.card canvas{
+
+width:100% !important;
+
+height:300px !important;
+
+}
+
+/* =========================
+   TABLE FIX (MARKS + ATTENDANCE)
+========================= */
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:10px;
+
+background:var(--bg-card);
+
+border-radius:12px;
+
+overflow:hidden;
+
+}
+
+
+th{
+
+background:rgba(59,130,246,0.15);
+
+color:var(--text-color);
+
+padding:12px;
+
+text-align:center;
+
+font-weight:600;
+
+}
+
+
+td{
+
+padding:12px;
+
+text-align:center;
+
+border-top:1px solid rgba(255,255,255,0.08);
+
+color:var(--text-color);
+
+}
+
+
+/* alternating rows */
+
+tr:nth-child(even){
+
+background:rgba(255,255,255,0.03);
+
+}
+
+
+/* hover effect */
+
+tr:hover{
+
+background:rgba(59,130,246,0.08);
+
+}
+
+
+/* empty value dash */
+
+td span{
+
+opacity:0.5;
+
+}
+
+/* =========================
+   AI ANALYZE BUTTON
+========================= */
+
+.ai-analyze-btn{
+
+width:100%;
+
+margin-top:15px;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(135deg,#3b82f6,#06b6d4);
+
+box-shadow:0 0 15px rgba(59,130,246,0.4);
+
+transition:all 0.3s ease;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+}
+
+.ai-analyze-btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 0 25px rgba(59,130,246,0.7);
+
+}
+
+
+/* result box */
+
+.ai-result{
+
+margin-top:15px;
+
+padding:15px;
+
+border-radius:12px;
+
+background:rgba(59,130,246,0.08);
+
+border:1px solid rgba(59,130,246,0.2);
+
+line-height:1.6;
+
+white-space:pre-line;
+
+}
+
+.chat-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.clear-btn{
+background:#ef4444;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+.clear-btn:hover{
+background:#dc2626;
+}

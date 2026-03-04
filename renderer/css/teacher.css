@@ -1,0 +1,256 @@
+/* ===== EduSphere Teacher Premium UI ===== */
+
+:root{
+
+--sidebar-width:240px;
+--gap:30px;
+--card-radius:18px;
+
+--bg-main:#020617;
+--bg-card:rgba(15,23,42,0.75);
+--bg-sidebar:rgba(2,6,23,0.9);
+--bg-topbar:rgba(15,23,42,0.7);
+
+--accent:#10b981;
+--accent-glow:rgba(16,185,129,0.5);
+
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#020617,#0f172a);
+color:white;
+display:flex;
+
+}
+
+
+
+/* ===== SIDEBAR ===== */
+
+.sidebar{
+
+width:var(--sidebar-width);
+height:100vh;
+position:fixed;
+background:var(--bg-sidebar);
+backdrop-filter:blur(12px);
+padding:25px;
+
+display:flex;
+flex-direction:column;
+
+}
+
+.sidebar h2{
+color:var(--accent);
+margin-bottom:35px;
+}
+
+.sidebar p{
+padding:12px;
+margin-bottom:12px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar p:hover{
+background:var(--accent);
+transform:translateX(5px);
+}
+
+
+
+/* ===== MAIN ===== */
+
+.main{
+margin-left:var(--sidebar-width);
+padding:35px;
+width:100%;
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+
+
+/* ===== TOPBAR ===== */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:var(--bg-topbar);
+padding:20px;
+border-radius:var(--card-radius);
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+
+
+/* ===== GRID ===== */
+
+.dashboard-grid{
+
+display:none;
+
+grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+gap:var(--gap);
+
+align-items:start;
+
+width:100%;
+
+}
+
+.dashboard-grid.active{
+display:grid;
+}
+
+
+
+/* ===== CARD ===== */
+
+.card{
+
+background:var(--bg-card);
+padding:28px;
+border-radius:var(--card-radius);
+backdrop-filter:blur(10px);
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+transition:0.3s;
+
+display:flex;
+flex-direction:column;
+gap:14px;
+
+min-height:120px;
+
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 0 25px var(--accent-glow);
+}
+
+
+
+/* ===== TABLE ===== */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th, td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+th{
+color:var(--accent);
+font-weight:600;
+}
+
+tr:hover{
+background:rgba(255,255,255,0.04);
+}
+
+
+
+/* ===== INPUTS ===== */
+
+input, select{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+background:#1e293b;
+color:white;
+margin-bottom:12px;
+}
+
+
+
+/* ===== BUTTON ===== */
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#10b981,#06b6d4);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px var(--accent-glow);
+}
+
+
+
+/* ===== LOGOUT ===== */
+
+.logout-btn{
+background:#ef4444;
+}
+
+.logout-btn:hover{
+background:#dc2626;
+}
+
+
+
+/* ===== AI BUTTON (FIXED CENTERING) ===== */
+
+.ai-button{
+
+position:fixed;
+
+bottom:30px;
+right:30px;
+
+width:65px;
+height:65px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:26px;
+
+background:linear-gradient(135deg,#10b981,#06b6d4);
+
+box-shadow:0 0 25px var(--accent-glow);
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.ai-button:hover{
+transform:scale(1.1);
+}
+
+
+
+/* ===== CHART FIX ===== */
+
+canvas{
+height:300px !important;
+}

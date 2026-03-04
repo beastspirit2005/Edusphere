@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduSphere Login</title>
+
+<link rel="stylesheet" href="css/login.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="login-card">
+
+
+<h1>EduSphere</h1>
+
+<p class="subtitle">Smart Learning Platform</p>
+
+
+<input type="email" id="email" placeholder="Email">
+
+
+<input type="password" id="password" placeholder="Password">
+
+
+<label for="role">Select Role</label>
+
+<select id="role">
+
+<option value="student">Student</option>
+
+<option value="teacher">Teacher</option>
+
+</select>
+
+
+<div class="buttons">
+
+<button onclick="login()">Login</button>
+
+<button onclick="register()" class="register">
+
+Register
+
+</button>
+
+</div>
+
+
+<p id="msg"></p>
+
+
+</div>
+
+
+</div>
+
+
+
+<script src="login.js"></script>
+
+
+</body>
+
+</html>

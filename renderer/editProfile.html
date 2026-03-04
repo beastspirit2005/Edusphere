@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Profile</title>
+
+<link rel="stylesheet" href="css/student.css">
+
+</head>
+
+
+<body>
+
+
+<div class="main">
+
+<div class="card">
+
+<h2>Edit Profile</h2>
+
+
+<label for="name">Name</label>
+
+<input
+type="text"
+id="name"
+class="input"
+placeholder="Enter your name"
+>
+
+
+<label for="currentPassword">Current Password</label>
+
+<input
+type="password"
+id="currentPassword"
+class="input"
+placeholder="Enter current password"
+>
+
+
+<label for="newPassword">New Password</label>
+
+<input
+type="password"
+id="newPassword"
+class="input"
+placeholder="Enter new password"
+>
+
+
+<button onclick="save()">Save</button>
+
+<button onclick="goBack()">Cancel</button>
+
+
+<p id="msg"></p>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+const { ipcRenderer } = require("electron");
+
+const email = localStorage.getItem("userEmail");
+
+
+// Load current data
+
+load();
+
+
+async function load(){
+
+const user =
+await ipcRenderer.invoke("getStudentProfile", email);
+
+if(user){
+
+document.getElementById("name").value =
+user.name || "";
+
+}
+
+}
+
+
+// Save
+
+async function save(){
+
+const result =
+await ipcRenderer.invoke(
+
+"updateStudentProfile",
+
+{
+
+email,
+
+name:
+document.getElementById("name").value,
+
+currentPassword:
+document.getElementById("currentPassword").value,
+
+newPassword:
+document.getElementById("newPassword").value
+
+}
+
+);
+
+document.getElementById("msg").innerText =
+result;
+
+}
+
+
+// Back
+
+function goBack(){
+
+window.location="student.html";
+
+}
+
+window.onload = () => {
+
+setTimeout(()=>{
+
+document.getElementById("name").focus();
+
+},100);
+
+};
+
+</script>
+
+
+</body>
+
+</html>
