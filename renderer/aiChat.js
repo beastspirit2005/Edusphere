@@ -1,3 +1,19 @@
+// =====================
+// APPLY SAVED THEME
+// =====================
+
+function applySavedTheme(){
+
+const theme = localStorage.getItem("theme") || "dark";
+
+if(theme === "light"){
+document.body.classList.add("light");
+}
+
+}
+
+applySavedTheme();
+
 const { ipcRenderer } = require("electron");
 
 const chatBox = document.getElementById("chatBox");
@@ -30,6 +46,22 @@ chatBox.scrollTo({
 top: chatBox.scrollHeight,
 behavior: "smooth"
 });
+
+}
+const savedTheme = localStorage.getItem("theme") || "dark"
+
+applyTheme(savedTheme)
+
+function applyTheme(theme){
+
+if(theme === "light"){
+document.body.classList.add("light-mode")
+document.body.classList.remove("dark-mode")
+}
+else{
+document.body.classList.add("dark-mode")
+document.body.classList.remove("light-mode")
+}
 
 }
 
@@ -91,7 +123,37 @@ addMessage("ai","Thinking...");
 
 const reply = await ipcRenderer.invoke("aiChat",message);
 
-chatBox.lastChild.innerText = reply;
+typeMessage(reply);
+
+function typeMessage(text){
+
+const messageDiv = chatBox.lastChild;
+
+messageDiv.innerText = "";
+
+let index = 0;
+
+const speed = 15; // typing speed
+
+function type(){
+
+if(index < text.length){
+
+messageDiv.textContent += text.charAt(index);
+
+index++;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+setTimeout(type, speed);
+
+}
+
+}
+
+type();
+
+}
 
 chatHistory.push({role:"ai",content:reply});
 

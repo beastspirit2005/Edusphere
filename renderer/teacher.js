@@ -24,6 +24,8 @@ init();
 
 async function init(){
 
+applySavedTheme();
+
 await loadDashboard();
 await loadStudents();
 await loadStudentsDropdown();
@@ -413,5 +415,28 @@ teacher?.class || "-";
 
 teacherSection.innerText =
 teacher?.section || "-";
+
+}
+
+
+/* =============================
+   THEME SYSTEM
+============================= */
+
+function applySavedTheme(){
+
+const theme = localStorage.getItem("theme") || "dark";
+
+if(theme === "light"){
+document.body.classList.add("light");
+}
+
+}
+
+function setTheme(theme){
+
+localStorage.setItem("theme",theme);
+
+applySavedTheme();
 
 }

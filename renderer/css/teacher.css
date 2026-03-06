@@ -11,8 +11,30 @@
 --bg-sidebar:rgba(2,6,23,0.9);
 --bg-topbar:rgba(15,23,42,0.7);
 
+--text-color:white;
+
 --accent:#10b981;
 --accent-glow:rgba(16,185,129,0.5);
+
+--input-bg:#1e293b;
+
+}
+
+/* ===== LIGHT THEME ===== */
+
+body.light{
+
+--bg-main:#f1f5f9;
+--bg-card:white;
+--bg-sidebar:#e2e8f0;
+--bg-topbar:#e2e8f0;
+
+--text-color:#0f172a;
+
+--accent:#3b82f6;
+--accent-glow:rgba(59,130,246,0.4);
+
+--input-bg:#e2e8f0;
 
 }
 
@@ -24,12 +46,15 @@ body{
 
 margin:0;
 font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#020617,#0f172a);
-color:white;
+
+background:var(--bg-main);
+color:var(--text-color);
+
 display:flex;
 
-}
+transition:background 0.3s ease,color 0.3s ease;
 
+}
 
 
 /* ===== SIDEBAR ===== */
@@ -38,9 +63,12 @@ display:flex;
 
 width:var(--sidebar-width);
 height:100vh;
+
 position:fixed;
+
 background:var(--bg-sidebar);
 backdrop-filter:blur(12px);
+
 padding:25px;
 
 display:flex;
@@ -63,36 +91,43 @@ transition:0.3s;
 
 .sidebar p:hover{
 background:var(--accent);
+color:white;
 transform:translateX(5px);
 }
-
 
 
 /* ===== MAIN ===== */
 
 .main{
+
 margin-left:var(--sidebar-width);
 padding:35px;
+
 width:100%;
+
 display:flex;
 flex-direction:column;
 gap:30px;
-}
 
+}
 
 
 /* ===== TOPBAR ===== */
 
 .topbar{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 background:var(--bg-topbar);
+
 padding:20px;
 border-radius:var(--card-radius);
-box-shadow:0 0 20px rgba(0,0,0,0.4);
-}
 
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+}
 
 
 /* ===== GRID ===== */
@@ -116,16 +151,20 @@ display:grid;
 }
 
 
-
 /* ===== CARD ===== */
 
 .card{
 
 background:var(--bg-card);
+
 padding:28px;
+
 border-radius:var(--card-radius);
+
 backdrop-filter:blur(10px);
+
 box-shadow:0 0 25px rgba(0,0,0,0.4);
+
 transition:0.3s;
 
 display:flex;
@@ -140,7 +179,6 @@ min-height:120px;
 transform:translateY(-4px);
 box-shadow:0 0 25px var(--accent-glow);
 }
-
 
 
 /* ===== TABLE ===== */
@@ -167,38 +205,52 @@ background:rgba(255,255,255,0.04);
 }
 
 
-
 /* ===== INPUTS ===== */
 
 input, select{
+
 width:100%;
+
 padding:12px;
+
 border-radius:10px;
 border:none;
-background:#1e293b;
-color:white;
-margin-bottom:12px;
-}
 
+background:var(--input-bg);
+
+color:var(--text-color);
+
+margin-bottom:12px;
+
+}
 
 
 /* ===== BUTTON ===== */
 
 button{
+
 padding:10px 20px;
+
 border:none;
 border-radius:10px;
+
 background:linear-gradient(135deg,#10b981,#06b6d4);
+
 color:white;
+
 cursor:pointer;
+
 transition:0.3s;
+
 }
 
 button:hover{
-transform:scale(1.05);
-box-shadow:0 0 15px var(--accent-glow);
-}
 
+transform:scale(1.05);
+
+box-shadow:0 0 15px var(--accent-glow);
+
+}
 
 
 /* ===== LOGOUT ===== */
@@ -212,8 +264,7 @@ background:#dc2626;
 }
 
 
-
-/* ===== AI BUTTON (FIXED CENTERING) ===== */
+/* ===== AI BUTTON ===== */
 
 .ai-button{
 
@@ -248,9 +299,19 @@ transform:scale(1.1);
 }
 
 
-
 /* ===== CHART FIX ===== */
 
 canvas{
 height:300px !important;
+}
+
+
+/* ===== LIGHT MODE IMPROVEMENTS ===== */
+
+body.light .card{
+box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+body.light table tr:hover{
+background:rgba(0,0,0,0.05);
 }

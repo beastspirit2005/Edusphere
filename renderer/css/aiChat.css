@@ -1,14 +1,48 @@
+/* =============================
+   THEME VARIABLES
+============================= */
+
+:root{
+
+--bg-main:#0f172a;
+--bg-card:#0b1b35;
+--bg-sidebar:#020617;
+
+--text-color:white;
+
+}
+
+/* LIGHT MODE */
+
+body.light{
+
+--bg-main:#f1f5f9;
+--bg-card:white;
+--bg-sidebar:#e2e8f0;
+
+--text-color:#0f172a;
+
+}
+
+
+/* =============================
+   LAYOUT
+============================= */
+
 .ai-layout{
 display:flex;
 height:100vh;
-background:#0f172a;
+background:var(--bg-main);
 }
 
-/* SIDEBAR */
+
+/* =============================
+   SIDEBAR
+============================= */
 
 .ai-sidebar{
 width:220px;
-background:#020617;
+background:var(--bg-sidebar);
 padding:20px;
 display:flex;
 flex-direction:column;
@@ -17,7 +51,7 @@ border-right:1px solid #1e293b;
 }
 
 .ai-sidebar h3{
-color:white;
+color:var(--text-color);
 margin-bottom:10px;
 }
 
@@ -35,7 +69,10 @@ text-align:left;
 background:#334155;
 }
 
-/* MAIN CHAT */
+
+/* =============================
+   MAIN CHAT
+============================= */
 
 .chat-main{
 flex:1;
@@ -46,13 +83,13 @@ padding:20px;
 
 .chat-header{
 margin-bottom:10px;
-color:white;
+color:var(--text-color);
 }
 
 .chat-box{
 flex:1;
 overflow-y:auto;
-background:#0b1b35;
+background:var(--bg-card);
 padding:15px;
 border-radius:10px;
 margin-bottom:10px;
@@ -62,7 +99,10 @@ gap:10px;
 scroll-behavior:smooth;
 }
 
-/* MESSAGE STYLES */
+
+/* =============================
+   MESSAGE STYLES
+============================= */
 
 .user{
 align-self:flex-end;
@@ -75,20 +115,28 @@ max-width:65%;
 
 .ai{
 align-self:flex-start;
-background:#1e3a8a;
-color:white;
+background:var(--bg-sidebar);
+color:var(--text-color);
 padding:10px 14px;
 border-radius:12px;
 max-width:65%;
+white-space: pre-wrap;
+line-height:1.5;
 }
 
-/* FILE UPLOAD */
+
+/* =============================
+   FILE UPLOAD
+============================= */
 
 .upload-area{
 padding:10px;
 }
 
-/* INPUT */
+
+/* =============================
+   INPUT AREA
+============================= */
 
 .chat-input{
 display:flex;
@@ -114,4 +162,13 @@ cursor:pointer;
 
 .chat-input button:hover{
 background:#2563eb;
+}
+
+
+/* =============================
+   SMOOTH THEME TRANSITION
+============================= */
+
+body{
+transition: background 0.3s ease, color 0.3s ease;
 }
