@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <title>EduSphere AI Tutor</title>
 
@@ -14,57 +12,69 @@
 
 <body>
 
-<div class="chat-container">
+<div class="ai-layout">
 
-<!-- TOP BAR -->
+    <!-- SIDEBAR -->
+    <div class="ai-sidebar">
 
-<div class="chat-topbar">
+        <h3>EduSphere AI</h3>
 
-<button class="back-btn" onclick="goBack()">⬅ Back</button>
+        <button onclick="goBack()">⬅ Back</button>
 
-<h2>🤖 EduSphere AI Tutor</h2>
-<button onclick="clearChat()">Clear Chat</button>
+        <button onclick="clearChat()">🧹 Clear Chat</button>
 
-</div>
+        <hr>
 
-<!-- CHAT AREA -->
+        <h4>Quick Tools</h4>
 
-<div id="chatBox" class="chat-box">
+        <button onclick="quickPrompt('Explain this topic simply')">
+        📘 Explain Topic
+        </button>
 
-<!-- messages will appear here -->
+        <button onclick="quickPrompt('Create quiz questions from this topic')">
+        🧠 Generate Quiz
+        </button>
 
-</div>
+        <button onclick="quickPrompt('Summarize this material')">
+        ✂ Summarize
+        </button>
 
-<!-- FILE UPLOAD -->
+        <button onclick="quickPrompt('Give step-by-step solution')">
+        🧮 Solve Problem
+        </button>
 
-<div class="upload-area">
+    </div>
 
-<input type="file" id="fileInput">
+    <!-- CHAT AREA -->
+    <div class="chat-main">
 
-</div>
+        <div class="chat-header">
+            <h2>🤖 EduSphere AI</h2>
+        </div>
 
-<!-- CHAT INPUT -->
+        <div id="chatBox" class="chat-box"></div>
 
-<div class="chat-input">
+        <div class="upload-area">
+            <input type="file" id="fileInput">
+        </div>
 
-<input
-type="text"
-id="userMessage"
-placeholder="Ask anything about your subjects..."
+        <div class="chat-input">
 
->
+            <input
+            type="text"
+            id="userMessage"
+            placeholder="Ask anything about your subjects..."
+            >
 
-<button onclick="sendMessage()">Send</button>
+            <button onclick="sendMessage()">Send</button>
 
+        </div>
 
-</div>
+    </div>
 
 </div>
 
 <script src="aiChat.js"></script>
 
-
-
 </body>
-
 </html>

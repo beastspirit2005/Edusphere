@@ -26,17 +26,24 @@ chatBox.appendChild(div);
 
 });
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTo({
+top: chatBox.scrollHeight,
+behavior: "smooth"
+});
 
 }
+
+// =====================
+// SET MODE (Teacher / Student)
+// =====================
 
 const dashboard = localStorage.getItem("dashboard");
 
 if(dashboard === "teacher"){
-    document.querySelector("h2").innerText = "🤖 EduSphere AI Assistant";
+document.querySelector("h2").innerText = "🤖 EduSphere AI Assistant";
 }
-else if(dashboard === "student"){
-    document.querySelector("h2").innerText = "🤖 EduSphere AI Tutor";
+else{
+document.querySelector("h2").innerText = "🤖 EduSphere AI Tutor";
 }
 
 renderHistory();
@@ -55,7 +62,10 @@ div.innerText = text;
 
 chatBox.appendChild(div);
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTo({
+top: chatBox.scrollHeight,
+behavior: "smooth"
+});
 
 }
 
@@ -65,7 +75,7 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 async function sendMessage(){
 
-const message = input.value;
+const message = input.value.trim();
 
 if(!message) return;
 
@@ -86,6 +96,30 @@ chatBox.lastChild.innerText = reply;
 chatHistory.push({role:"ai",content:reply});
 
 localStorage.setItem("chatHistory",JSON.stringify(chatHistory));
+
+}
+
+// =====================
+// ENTER KEY SUPPORT
+// =====================
+
+input.addEventListener("keypress", function(e){
+
+if(e.key === "Enter"){
+sendMessage();
+}
+
+});
+
+// =====================
+// QUICK PROMPTS
+// =====================
+
+function quickPrompt(text){
+
+input.value = text;
+
+sendMessage();
 
 }
 
@@ -132,23 +166,20 @@ chatBox.innerHTML="";
 
 }
 
+// =====================
+// BACK BUTTON
+// =====================
+
 function goBack(){
 
 const params = new URLSearchParams(window.location.search);
 const from = params.get("from");
 
 if(from === "teacher"){
-    window.location.href = "teacher.html";
+window.location.href = "teacher.html";
 }
 else{
-    window.location.href = "student.html";
+window.location.href = "student.html";
 }
 
-}
-
-const params = new URLSearchParams(window.location.search);
-const from = params.get("from");
-
-if(from === "teacher"){
-    document.querySelector("h2").innerText = "🤖 EduSphere AI Assistant";
 }
