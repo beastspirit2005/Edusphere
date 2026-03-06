@@ -16,6 +16,7 @@ const axios = require("axios");
 
 const fs = require("fs")
 const pdf = require("pdf-parse")
+const mammoth = require("mammoth");
 const Tesseract = require("tesseract.js")
 // ===============================
 // AI CHAT MEMORY
@@ -81,7 +82,7 @@ function createWindow() {
     });
 
 
-    // ✅ FIX 2 — Force focus after every page load
+    
 
     win.webContents.on('did-finish-load', () => {
 
@@ -791,6 +792,8 @@ return "AI tutor failed"
 
 })
 
+
+
 ipcMain.handle("analyzeFile", async (event, file) => {
 
 try{
@@ -801,21 +804,48 @@ fs.writeFileSync(tempPath, Buffer.from(file.data))
 
 let extractedText = ""
 
-if(file.name.endsWith(".pdf")){
+const ext = path.extname(file.name).toLowerCase()
+
+// PDF
+if(ext === ".pdf"){
 
 const buffer = fs.readFileSync(tempPath)
 
 const pdfData = await pdf(buffer)
 
-extractedText = pdfData.text.slice(0,4000)
+extractedText = pdfData.text
 
 }
 
-else if(file.name.match(/\.(png|jpg|jpeg)$/)){
+// IMAGE OCR
+else if(ext === ".png" || ext === ".jpg" || ext === ".jpeg"){
 
 const result = await Tesseract.recognize(tempPath,"eng")
 
 extractedText = result.data.text
+
+}
+
+// TXT
+else if(ext === ".txt"){
+
+extractedText = fs.readFileSync(tempPath,"utf8")
+
+}
+
+// DOCX
+else if(ext === ".docx"){
+
+const result = await mammoth.extractRawText({path: tempPath})
+
+extractedText = result.value
+
+}
+
+// DOC (limited)
+else if(ext === ".doc"){
+
+return "DOC format not fully supported. Please convert to DOCX."
 
 }
 
@@ -825,15 +855,21 @@ return "Unsupported file type."
 
 }
 
+// limit size for AI
+extractedText = extractedText.slice(0,6000)
+
 const prompt = `
 You are EduSphere AI tutor.
 
-Analyze this student material and explain clearly.
+Analyze the uploaded study material and explain clearly.
+
+Tasks:
+- Explain the topic simply
+- Summarize key points
+- Highlight formulas or definitions
 
 Material:
 ${extractedText}
-
-Explain in simple terms for a student.
 `
 
 const response = await axios.post(
@@ -841,9 +877,14 @@ const response = await axios.post(
 {
 model:"llama3:8b",
 prompt:prompt,
-stream:false
+stream:false,
+options:{
+num_predict:800
+}
 }
 )
+
+fs.unlinkSync(tempPath)
 
 return response.data.response
 
@@ -851,6 +892,7 @@ return response.data.response
 catch(error){
 
 console.error(error)
+
 return "File analysis failed"
 
 }
